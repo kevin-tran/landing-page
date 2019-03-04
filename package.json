@@ -11,7 +11,7 @@
     "emotion-server": "^10.0.7",
     "emotion-theming": "^10.0.7",
     "gatsby": "^2.0.118",
-    "gatsby-image": "^2.0.29",
+    "gatsby-image": "^2.0.31",
     "gatsby-plugin-emotion": "^4.0.3",
     "gatsby-plugin-manifest": "^2.0.17",
     "gatsby-plugin-offline": "^2.0.23",
@@ -22,7 +22,9 @@
     "prop-types": "^15.7.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "react-spring": "^8.0.9",
+    "react-with-gesture": "^4.0.5"
   },
   "keywords": [
     "gatsby"
@@ -43,6 +45,8 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "devDependencies": {
+    "babel-preset-gatsby": "^0.1.8",
+    "gatsby-source-contentful": "^2.0.33",
     "prettier": "^1.16.4"
   }
 }
