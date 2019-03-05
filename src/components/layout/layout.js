@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
+import { Global, css } from "@emotion/core";
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -15,6 +16,13 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
+        <Global
+          styles={css`
+            body {
+              margin: 0;
+            }
+          `}
+        />
         {children}
         <></>
       </>
