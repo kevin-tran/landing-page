@@ -13,7 +13,9 @@ const IndexPage = () => (
       Kevin Tran @ <a href="https://www.airwallex.com">Airwallex</a>
     </h1>
     <div css={{ paddingTop: 5, ">*": { marginRight: 10 } }}>
-      <Link href="mailto:kevintranvs@outlook.com">Email</Link>
+      <Link href="mailto:kevintranvs@outlook.com" external>
+        Email
+      </Link>
       <Link href="https://www.linkedin.com/in/kevin-tran-35a135108/" external>
         LinkedIn
       </Link>
