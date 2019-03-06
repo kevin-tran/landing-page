@@ -24,18 +24,19 @@ const NonStretchedImage = props => {
     };
   }
 
-  return <Img {...normalizedProps} />;
+  return <Img {...normalizedProps} alt={props.title} />;
 };
 
 const AlbumTemplate = ({ data }) => {
   const album = get(data, "contentfulAlbum.images");
   const title = get(data, "contentfulAlbum.title");
+
   return (
     <Layout>
       <SEO title={title} />
       <Gutter>
         {album.map(image => {
-          return <NonStretchedImage {...image} />;
+          return <NonStretchedImage {...image} key={image.title} />;
         })}
       </Gutter>
     </Layout>
@@ -49,6 +50,7 @@ export const pageQuery = graphql`
     contentfulAlbum(id: { eq: $id }) {
       title
       images {
+        title
         fluid(maxWidth: 1306, quality: 80) {
           base64
           aspectRatio
