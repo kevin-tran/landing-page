@@ -68,7 +68,7 @@ const BodyContent = [
   {
     paragraph: (
       <Content>
-        tincidunt eros <Link>faucibus</Link> eu. Nunc facilisis ipsum
+        tincidunt eros <Link>test</Link> eu. Nunc facilisis ipsum
       </Content>
     ),
     key: "paragraph-3"
