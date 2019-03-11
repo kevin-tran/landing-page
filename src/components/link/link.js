@@ -6,7 +6,27 @@ import styled from "@emotion/styled";
 
 const linkStyles = css({
   color: "black",
-  fontWeight: 700
+  fontWeight: 700,
+  textDecoration: "none",
+  position: "relative",
+  ["&:before"]: {
+    content: "''",
+    zIndex: -1,
+    width: "100%",
+    bottom: 0,
+    left: 0,
+    position: "absolute",
+    height: 2,
+    background: "black",
+    transform: "scale3d(0,1,1)",
+    transformOrigin: "0% 50%",
+    transition: "transform 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000)"
+  },
+  ["&:hover"]: {
+    ["&:before"]: {
+      transform: "scale3d(1,1,1)"
+    }
+  }
 });
 
 const ATag = styled("a")(linkStyles);

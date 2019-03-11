@@ -1,11 +1,11 @@
 /** @jsx jsx */
 
-import { useRef } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useSpring, useChain, useTransition, animated } from "react-spring";
+import { PageViewContext } from "../global/pageViewContext";
 
-import Layout from "../components/layout/layout";
 import SEO from "../components/seo/seo";
 import Link from "../components/link/link";
 
@@ -56,7 +56,8 @@ const BodyContent = [
   {
     paragraph: (
       <Content>
-        Lorem ipsum dolor sit amet, <Link>consectetur</Link> adipiscing
+        Lorem ipsum dolor sit amet, <Link href="/about">consectetur</Link>{" "}
+        adipiscing
       </Content>
     ),
     key: "paragraph-1"
@@ -83,7 +84,17 @@ const BodyContent = [
   }
 ];
 
-const IndexPage = () => {
+const IndexPage = props => {
+  const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
+
+  useEffect(() => {
+    return () => {
+      if (!homeHasLoaded) {
+        setHasLoaded();
+      }
+    };
+  });
+
   const landingRef = useRef();
   const landingProps = useSpring({
     to: async next => {
@@ -114,10 +125,14 @@ const IndexPage = () => {
     ref: transitionRef
   });
 
-  useChain([landingRef, bodyRef, transitionRef]);
+  useChain(
+    homeHasLoaded
+      ? [bodyRef, transitionRef]
+      : [landingRef, bodyRef, transitionRef]
+  );
 
   return (
-    <Layout>
+    <>
       <SEO title="Home" keywords={["gatsby", "react", "portfolio"]} />
       <Root>
         <WaveHeading style={landingProps} />
@@ -133,7 +148,7 @@ const IndexPage = () => {
           })}
         </Body>
       </Root>
-    </Layout>
+    </>
   );
 };
 

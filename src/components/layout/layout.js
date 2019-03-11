@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { ThemeProvider } from "emotion-theming";
 
 import Theme from "../../global/theme";
+import PageViewProvider from "../../global/pageViewContext";
 
 import Cursor from "../cursor/cursor";
 
@@ -29,14 +30,18 @@ const globalStyles = css`
   }
 `;
 
-const Layout = ({ children }) => (
-  <ThemeProvider theme={Theme}>
-    <Container>
-      <Global styles={globalStyles} />
-      {children}
-      <Cursor />
-    </Container>
-  </ThemeProvider>
-);
+const Layout = ({ children }) => {
+  return (
+    <PageViewProvider>
+      <ThemeProvider theme={Theme}>
+        <Container>
+          <Global styles={globalStyles} />
+          {children}
+          <Cursor />
+        </Container>
+      </ThemeProvider>
+    </PageViewProvider>
+  );
+};
 
 export default Layout;

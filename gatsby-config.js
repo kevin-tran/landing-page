@@ -14,6 +14,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
     {
+      resolve: "gatsby-plugin-layout",
+      options: {
+        component: require.resolve("./src/components/layout/layout")
+      }
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Kevin Tran`,
