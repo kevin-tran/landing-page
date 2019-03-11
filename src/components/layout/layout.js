@@ -30,17 +30,17 @@ const globalStyles = css`
   }
 `;
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...rest }) => {
   return (
-    <PageViewProvider>
-      <ThemeProvider theme={Theme}>
+    <ThemeProvider theme={Theme}>
+      <PageViewProvider>
         <Container>
           <Global styles={globalStyles} />
           {children}
           <Cursor />
         </Container>
-      </ThemeProvider>
-    </PageViewProvider>
+      </PageViewProvider>
+    </ThemeProvider>
   );
 };
 

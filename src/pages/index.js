@@ -42,7 +42,7 @@ const WaveHeading = ({ style: { shake, ...rest } }) => {
           transform: shake
             .interpolate({
               range: [0.2, 0.5, 0.7, 1],
-              output: [1, 0.9, 1.2, 1]
+              output: [1, 0.95, 1.05, 1]
             })
             .interpolate(x => `scale(${x})`)
         }}
@@ -83,7 +83,7 @@ const BodyContent = [
   {
     paragraph: (
       <Content>
-        tincidunt eros <Link>test</Link> eu. Nunc facilisis ipsum
+        tincidunt eros <Link href="/about">test</Link> eu. Nunc facilisis ipsum
       </Content>
     ),
     key: "paragraph-3"
@@ -91,14 +91,17 @@ const BodyContent = [
   {
     paragraph: (
       <Content>
-        finibus velit accumsan, eget porta <Link>eros</Link> mollis
+        finibus velit accumsan, eget porta <Link href="/about">eros</Link>{" "}
+        mollis
       </Content>
     ),
     key: "paragraph-4"
   }
 ];
 
-const IndexPage = () => {
+const IndexPage = ({ transitionStatus, entry, exit }) => {
+  const isActive = transitionStatus === "entered";
+
   const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
 
   useEffect(() => {
@@ -124,35 +127,22 @@ const IndexPage = () => {
     ref: landingRef
   });
 
-  const bodyRef = useRef();
-  const bodyProps = useSpring({
-    to: { opacity: 1 },
-    from: {
-      opacity: 1
-    },
-    ref: bodyRef
-  });
-
   const transitionRef = useRef();
   const transitions = useTransition(BodyContent, item => item.key, {
     from: { height: 0 },
-    enter: { height: 44 },
+    enter: { height: useTransition ? 44 : 0 },
     leave: { height: 0 },
     ref: transitionRef
   });
 
-  useChain(
-    homeHasLoaded
-      ? [bodyRef, transitionRef]
-      : [landingRef, bodyRef, transitionRef]
-  );
+  useChain(homeHasLoaded ? [transitionRef] : [landingRef, transitionRef]);
 
   return (
     <>
       <SEO title="Home" keywords={["gatsby", "react", "portfolio"]} />
       <Root>
         <WaveHeading style={landingProps} />
-        <Body css={{ maxWidth: 1200 }} style={bodyProps}>
+        <Body css={{ maxWidth: 1200 }}>
           {transitions.map(({ item, props: { height }, key }) => {
             return (
               <Row key={key}>
