@@ -41,7 +41,7 @@ const WaveHeading = ({ style: { shake, ...rest } }) => {
         style={{
           transform: shake
             .interpolate({
-              range: [0.25, 0.5, 0.7, 1],
+              range: [0.2, 0.5, 0.7, 1],
               output: [1, 0.9, 1.2, 1]
             })
             .interpolate(x => `scale(${x})`)
