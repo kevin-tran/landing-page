@@ -20,7 +20,8 @@ const Heading = styled(animated.h1)({
   lineHeight: 1.4,
   marginBottom: "1rem",
   marginTop: 0,
-  position: "absolute"
+  position: "absolute",
+  display: "flex"
 });
 
 const Body = styled(animated.h3)(({ theme }) => ({
@@ -30,14 +31,27 @@ const Body = styled(animated.h3)(({ theme }) => ({
   margin: 0
 }));
 
-const WaveHeading = props => (
-  <Heading {...props}>
-    Hi!{" "}
-    <span role="img" aria-label="wave emoji">
-      👋
-    </span>
-  </Heading>
-);
+const WaveHeading = ({ style: { shake, ...rest } }) => {
+  return (
+    <Heading style={rest}>
+      Hi!{" "}
+      <animated.div
+        role="img"
+        aria-label="wave emoji"
+        style={{
+          transform: shake
+            .interpolate({
+              range: [0.25, 0.5, 0.7, 1],
+              output: [1, 0.9, 1.2, 1]
+            })
+            .interpolate(x => `scale(${x})`)
+        }}
+      >
+        👋
+      </animated.div>
+    </Heading>
+  );
+};
 
 const Content = styled(animated.span)({
   display: "block",
@@ -84,7 +98,7 @@ const BodyContent = [
   }
 ];
 
-const IndexPage = props => {
+const IndexPage = () => {
   const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
 
   useEffect(() => {
@@ -99,11 +113,13 @@ const IndexPage = props => {
   const landingProps = useSpring({
     to: async next => {
       await next({ opacity: 1, transform: "translateY(0)" });
+      await next({ shake: 1 });
       await next({ opacity: 0, transform: "translateY(50px)" });
     },
     from: {
       opacity: 0,
-      transform: "translateY(50px)"
+      transform: "translateY(50px)",
+      shake: 0
     },
     ref: landingRef
   });
