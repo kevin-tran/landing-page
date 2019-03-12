@@ -14,9 +14,9 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
     {
-      resolve: "gatsby-plugin-transition-link",
+      resolve: "gatsby-plugin-layout",
       options: {
-        layout: require.resolve("./src/components/layout/layout")
+        component: require.resolve("./src/components/layout/layout")
       }
     },
     {

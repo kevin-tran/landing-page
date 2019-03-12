@@ -1,5 +1,5 @@
 import React from "react";
-import AniLink from "gatsby-plugin-transition-link/AniLink";
+import { Link as LinkBase } from "gatsby";
 
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
@@ -30,7 +30,7 @@ const linkStyles = css({
 });
 
 const ATag = styled("a")(linkStyles);
-const GatsbyLink = styled(AniLink)(linkStyles);
+const GatsbyLink = styled(LinkBase)(linkStyles);
 
 const Link = ({ children, href, external, ...rest }) => {
   if (external) {
@@ -42,19 +42,7 @@ const Link = ({ children, href, external, ...rest }) => {
   }
 
   return (
-    <GatsbyLink
-      to={href}
-      activeStyle={linkStyles}
-      {...rest}
-      cover
-      bg="#000"
-      exit={{
-        length: 2
-      }}
-      entry={{
-        length: 1
-      }}
-    >
+    <GatsbyLink to={href} activeStyle={linkStyles} {...rest}>
       {children}
     </GatsbyLink>
   );
