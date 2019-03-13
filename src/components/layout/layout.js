@@ -33,11 +33,7 @@ const globalStyles = css`
   }
 `;
 
-const Layout = ({ children, location }) => {
-  useEffect(() => {
-    return () => {};
-  }, [location.pathname]);
-
+const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={Theme}>
       <PageViewProvider>
