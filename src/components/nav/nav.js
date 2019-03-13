@@ -36,7 +36,16 @@ const Nav = () => {
       >
         about
       </Link>
-      <Link href="/" css={{ position: "absolute", top: 30, left: 30 }}>
+      <Link
+        href="/"
+        css={{ position: "absolute", top: 30, left: 30 }}
+        exit={{
+          length: 0.3
+        }}
+        entry={{
+          delay: 0.6
+        }}
+      >
         kevin
       </Link>
       <PlusIcon css={{ position: "absolute", bottom: 30, right: 30 }} />

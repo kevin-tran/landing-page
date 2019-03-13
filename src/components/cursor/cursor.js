@@ -1,18 +1,10 @@
 /** @jsx jsx */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "@emotion/styled";
-import { jsx } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import { useTrail, useSpring, animated } from "react-spring";
-
-const CursorWrapper = styled(animated.div)({
-  position: "fixed",
-  left: 0,
-  top: 0,
-  pointerEvents: "none",
-  borderRadius: "50%",
-  willChange: "transform"
-});
+import { CursorContext } from "../../global/cursorContext";
 
 const CursorOuter = styled("div")({
   width: 30,
@@ -30,7 +22,37 @@ const CursorInner = styled(animated.div)({
   borderRadius: "50%"
 });
 
-const Circle = () => {
+const CursorWrapper = styled(animated.div)({
+  position: "fixed",
+  left: 0,
+  top: 0,
+  pointerEvents: "none",
+  borderRadius: "50%",
+  willChange: "transform"
+});
+
+const LinkHover = css({
+  [CursorInner]: {
+    display: "none"
+  }
+});
+
+const CircleBase = css({
+  fill: "none",
+  cx: 25,
+  cy: 25,
+  r: 20,
+  stroke: "#000",
+  strokeWidth: 1,
+  strokeDasharray: 1000,
+  transition: "all .4s ease-in-out"
+});
+
+const CircleHover = css({
+  fill: "#eee"
+});
+
+const Circle = ({ activeState }) => {
   const props = useSpring({ offset: 0, from: { offset: 1000 } });
 
   return (
@@ -41,15 +63,8 @@ const Circle = () => {
       css={{ transform: "translate(-22px, -23px)" }}
     >
       <animated.circle
-        fill="none"
-        cx="25"
-        cy="25"
-        r="20"
-        stroke="#000"
-        strokeWidth="1"
         strokeDashoffset={props.offset}
-        strokeDasharray="1000"
-        css={{ transition: "all 4s ease-in-out" }}
+        css={[CircleBase, activeState === "linkHover" && CircleHover]}
       />
     </animated.svg>
   );
@@ -60,6 +75,7 @@ const main = { mass: 0, tension: 0, friction: 0, clamp: true };
 const trans = (x, y) => `matrix(1, 0, 0, 1, ${x}, ${y})`;
 
 const Cursor = () => {
+  const { activeState } = useContext(CursorContext);
   const [trail, set] = useTrail(2, () => ({
     xy: [0, 0],
     config: i => (i === 0 ? main : fast)
@@ -80,11 +96,14 @@ const Cursor = () => {
       {trail.map(({ xy }, index) => {
         return (
           <React.Fragment key={index}>
-            <CursorWrapper style={{ transform: xy.interpolate(trans) }}>
+            <CursorWrapper
+              style={{ transform: xy.interpolate(trans) }}
+              css={activeState === "linkHover" && LinkHover}
+            >
               {index === 0 && <CursorInner />}
               {index === 1 && (
                 <CursorOuter>
-                  <Circle />
+                  <Circle activeState={activeState} />
                 </CursorOuter>
               )}
             </CursorWrapper>

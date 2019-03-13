@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import LinkBase from "gatsby-plugin-transition-link";
-
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
+
+import { CursorContext } from "../../global/cursorContext";
 
 const linkStyles = css({
   color: "black",
@@ -33,6 +34,8 @@ const ATag = styled("a")(linkStyles);
 const GatsbyLink = styled(LinkBase)(linkStyles);
 
 const Link = ({ children, href, external, ...rest }) => {
+  const { setActiveState } = useContext(CursorContext);
+
   if (external) {
     return (
       <ATag href={href} target="_blank" rel="noopener noreferrer">
@@ -42,7 +45,13 @@ const Link = ({ children, href, external, ...rest }) => {
   }
 
   return (
-    <GatsbyLink to={href} activeStyle={linkStyles} {...rest}>
+    <GatsbyLink
+      to={href}
+      activeStyle={linkStyles}
+      {...rest}
+      onMouseEnter={() => setActiveState("linkHover")}
+      onMouseLeave={() => setActiveState("normal")}
+    >
       {children}
     </GatsbyLink>
   );

@@ -7,6 +7,7 @@ import { ThemeProvider } from "emotion-theming";
 
 import Theme from "../../global/theme";
 import PageViewProvider from "../../global/pageViewContext";
+import CursorProvider from "../../global/cursorContext";
 
 import Cursor from "../cursor/cursor";
 import Nav from "../nav/nav";
@@ -39,9 +40,11 @@ const Layout = ({ children }) => {
       <PageViewProvider>
         <Container>
           <Global styles={globalStyles} />
-          {children}
-          <Cursor />
-          <Nav />
+          <CursorProvider>
+            {children}
+            <Cursor />
+            <Nav />
+          </CursorProvider>
         </Container>
       </PageViewProvider>
     </ThemeProvider>
