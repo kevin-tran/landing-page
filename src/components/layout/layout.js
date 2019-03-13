@@ -46,7 +46,7 @@ const Layout = ({ children, location: { pathname } }) => {
           <CursorProvider>
             {children}
             <Cursor />
-            <Nav pathname={pathname} />
+            <Nav pathname={pathname && pathname} />
           </CursorProvider>
         </Container>
       </PageViewProvider>
