@@ -75,10 +75,10 @@ const BodyContent = [
         <Link
           href="/about"
           exit={{
-            length: 0.3
+            length: 0.2
           }}
           entry={{
-            delay: 0.6
+            delay: 0.7
           }}
         >
           consectetur
@@ -123,7 +123,7 @@ const IndexPage = ({ transitionStatus }) => {
         setHasLoaded();
       }
     };
-  });
+  }, [homeHasLoaded]);
 
   const landingRef = useRef();
   const landingProps = useSpring({

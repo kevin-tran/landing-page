@@ -13,12 +13,8 @@ import Cursor from "../cursor/cursor";
 import Nav from "../nav/nav";
 
 const Container = styled("main")({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
   margin: "0 auto",
-  minHeight: "100vh",
-  flexDirection: "column"
+  minHeight: "100vh"
 });
 
 const globalStyles = css`
@@ -32,9 +28,16 @@ const globalStyles = css`
     margin: 0;
     cursor: none;
   }
+  .tl-edges {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 `;
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location: { pathname } }) => {
   return (
     <ThemeProvider theme={Theme}>
       <PageViewProvider>
@@ -43,7 +46,7 @@ const Layout = ({ children }) => {
           <CursorProvider>
             {children}
             <Cursor />
-            <Nav />
+            <Nav pathname={pathname} />
           </CursorProvider>
         </Container>
       </PageViewProvider>

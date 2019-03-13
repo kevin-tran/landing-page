@@ -21,33 +21,41 @@ const Link = styled(LinkBase)({
   lineHeight: 1.4
 });
 
-const Nav = () => {
+const Nav = ({ pathname }) => {
   return (
     <NavContainer>
-      <Link
-        href="/about"
-        css={{ position: "absolute", top: 30, right: 30 }}
-        exit={{
-          length: 0.3
-        }}
-        entry={{
-          delay: 0.6
-        }}
-      >
-        about
-      </Link>
-      <Link
-        href="/"
-        css={{ position: "absolute", top: 30, left: 30 }}
-        exit={{
-          length: 0.3
-        }}
-        entry={{
-          delay: 0.6
-        }}
-      >
-        kevin
-      </Link>
+      {pathname !== "/about" ? (
+        <Link
+          href="/about"
+          css={{ position: "absolute", top: 30, right: 30 }}
+          exit={{
+            length: 0.3
+          }}
+          entry={{
+            delay: 0.6
+          }}
+        >
+          about
+        </Link>
+      ) : (
+        <span css={{ position: "absolute", top: 30, right: 30 }}>about</span>
+      )}
+      {pathname !== "/" ? (
+        <Link
+          href="/"
+          css={{ position: "absolute", top: 30, left: 30 }}
+          exit={{
+            length: 0.3
+          }}
+          entry={{
+            delay: 0.6
+          }}
+        >
+          kevin
+        </Link>
+      ) : (
+        <span css={{ position: "absolute", top: 30, left: 30 }}>kevin</span>
+      )}
       <PlusIcon css={{ position: "absolute", bottom: 30, right: 30 }} />
       <Clock css={{ position: "absolute", bottom: 30, left: 30 }} />
     </NavContainer>
