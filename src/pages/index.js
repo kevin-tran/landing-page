@@ -21,7 +21,8 @@ const Heading = styled(animated.h1)({
   marginBottom: "1rem",
   marginTop: 0,
   position: "absolute",
-  display: "flex"
+  display: "flex",
+  opacity: 0
 });
 
 const Body = styled(animated.h3)(({ theme }) => ({

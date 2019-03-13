@@ -33,7 +33,7 @@ const linkStyles = css({
 const ATag = styled("a")(linkStyles);
 const GatsbyLink = styled(LinkBase)(linkStyles);
 
-const Link = ({ children, href, external, ...rest }) => {
+const Link = ({ children, href, external, exit, entry, ...rest }) => {
   const { setActiveState } = useContext(CursorContext);
 
   if (external) {
@@ -48,9 +48,10 @@ const Link = ({ children, href, external, ...rest }) => {
     <GatsbyLink
       to={href}
       activeStyle={linkStyles}
-      {...rest}
       onMouseEnter={() => setActiveState("linkHover")}
       onMouseLeave={() => setActiveState("normal")}
+      exit={{ ...exit, trigger: () => setActiveState("normal") }}
+      {...rest}
     >
       {children}
     </GatsbyLink>
