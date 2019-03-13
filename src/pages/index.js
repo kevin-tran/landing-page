@@ -70,7 +70,18 @@ const BodyContent = [
   {
     paragraph: (
       <Content>
-        Lorem ipsum dolor sit amet, <Link href="/about">consectetur</Link>{" "}
+        Lorem ipsum dolor sit amet,{" "}
+        <Link
+          href="/about"
+          exit={{
+            length: 0.6
+          }}
+          entry={{
+            delay: 1
+          }}
+        >
+          consectetur
+        </Link>{" "}
         adipiscing
       </Content>
     ),
@@ -99,8 +110,9 @@ const BodyContent = [
   }
 ];
 
-const IndexPage = ({ transitionStatus, entry, exit }) => {
-  const isActive = transitionStatus === "entered";
+const IndexPage = ({ transitionStatus }) => {
+  const isActive =
+    transitionStatus === "entered" || transitionStatus === "entering";
 
   const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
 
@@ -114,11 +126,14 @@ const IndexPage = ({ transitionStatus, entry, exit }) => {
 
   const landingRef = useRef();
   const landingProps = useSpring({
-    to: async next => {
-      await next({ opacity: 1, transform: "translateY(0)" });
-      await next({ shake: 1 });
-      await next({ opacity: 0, transform: "translateY(50px)" });
-    },
+    to: [
+      { opacity: 1, transform: "translateY(0)" },
+      { shake: 1 },
+      {
+        opacity: 0,
+        transform: "translateY(-100%)"
+      }
+    ],
     from: {
       opacity: 0,
       transform: "translateY(50px)",
@@ -130,8 +145,9 @@ const IndexPage = ({ transitionStatus, entry, exit }) => {
   const transitionRef = useRef();
   const transitions = useTransition(BodyContent, item => item.key, {
     from: { height: 0 },
-    enter: { height: useTransition ? 44 : 0 },
+    enter: { height: 44 },
     leave: { height: 0 },
+    update: { height: !isActive ? 0 : 44 },
     ref: transitionRef
   });
 

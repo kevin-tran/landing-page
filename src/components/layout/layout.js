@@ -1,5 +1,7 @@
-import React from "react";
-import { Global, css } from "@emotion/core";
+/** @jsx jsx */
+
+import React, { useEffect } from "react";
+import { Global, css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { ThemeProvider } from "emotion-theming";
 
@@ -7,6 +9,7 @@ import Theme from "../../global/theme";
 import PageViewProvider from "../../global/pageViewContext";
 
 import Cursor from "../cursor/cursor";
+import Nav from "../nav/nav";
 
 const Container = styled("main")({
   display: "flex",
@@ -30,7 +33,11 @@ const globalStyles = css`
   }
 `;
 
-const Layout = ({ children, ...rest }) => {
+const Layout = ({ children, location }) => {
+  useEffect(() => {
+    return () => {};
+  }, [location.pathname]);
+
   return (
     <ThemeProvider theme={Theme}>
       <PageViewProvider>
@@ -38,6 +45,7 @@ const Layout = ({ children, ...rest }) => {
           <Global styles={globalStyles} />
           {children}
           <Cursor />
+          <Nav />
         </Container>
       </PageViewProvider>
     </ThemeProvider>

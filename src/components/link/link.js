@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as LinkBase } from "gatsby";
+import LinkBase from "gatsby-plugin-transition-link";
 
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
