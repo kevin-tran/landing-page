@@ -24,7 +24,16 @@ const Link = styled(LinkBase)({
 const Nav = () => {
   return (
     <NavContainer>
-      <Link href="/about" css={{ position: "absolute", top: 30, right: 30 }}>
+      <Link
+        href="/about"
+        css={{ position: "absolute", top: 30, right: 30 }}
+        exit={{
+          length: 0.3
+        }}
+        entry={{
+          delay: 0.6
+        }}
+      >
         about
       </Link>
       <Link href="/" css={{ position: "absolute", top: 30, left: 30 }}>

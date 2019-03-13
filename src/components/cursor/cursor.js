@@ -55,21 +55,19 @@ const Circle = () => {
   );
 };
 
-const fast = { mass: 1, tension: 1500, friction: 50 };
+const fast = { mass: 1, tension: 3000, friction: 80, clamp: true };
+const main = { mass: 0, tension: 0, friction: 0, clamp: true };
 const trans = (x, y) => `matrix(1, 0, 0, 1, ${x}, ${y})`;
 
 const Cursor = () => {
-  const [xy, setXy] = useState([0, 0]);
-  const [trail, set] = useTrail(1, () => ({
+  const [trail, set] = useTrail(2, () => ({
     xy: [0, 0],
-    config: fast
+    config: i => (i === 0 ? main : fast)
   }));
 
   useEffect(() => {
-    const setFromEvent = e => {
-      set({ xy: [e.clientX, e.clientY] });
-      setXy([e.clientX, e.clientY]);
-    };
+    const setFromEvent = e => set({ xy: [e.clientX, e.clientY] });
+
     window.addEventListener("mousemove", setFromEvent);
 
     return () => {
@@ -79,16 +77,16 @@ const Cursor = () => {
 
   return (
     <React.Fragment>
-      <CursorWrapper style={{ transform: trans(xy[0], xy[1]) }}>
-        <CursorInner />
-      </CursorWrapper>
       {trail.map(({ xy }, index) => {
         return (
           <React.Fragment key={index}>
             <CursorWrapper style={{ transform: xy.interpolate(trans) }}>
-              <CursorOuter>
-                <Circle />
-              </CursorOuter>
+              {index === 0 && <CursorInner />}
+              {index === 1 && (
+                <CursorOuter>
+                  <Circle />
+                </CursorOuter>
+              )}
             </CursorWrapper>
           </React.Fragment>
         );

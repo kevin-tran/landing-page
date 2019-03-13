@@ -7,10 +7,10 @@ const About = () => (
     <Link
       href="/"
       exit={{
-        length: 0.6
+        length: 0
       }}
       entry={{
-        delay: 1
+        delay: 0
       }}
     >
       Go back

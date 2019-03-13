@@ -74,10 +74,10 @@ const BodyContent = [
         <Link
           href="/about"
           exit={{
-            length: 0.6
+            length: 0.3
           }}
           entry={{
-            delay: 1
+            delay: 0.6
           }}
         >
           consectetur
