@@ -37,7 +37,7 @@ const globalStyles = css`
   }
 `;
 
-const Layout = ({ children, location: { pathname } }) => {
+const Layout = ({ children, location }) => {
   return (
     <ThemeProvider theme={Theme}>
       <PageViewProvider>
@@ -46,7 +46,7 @@ const Layout = ({ children, location: { pathname } }) => {
           <CursorProvider>
             {children}
             <Cursor />
-            <Nav pathname={pathname && pathname} />
+            <Nav pathname={location} />
           </CursorProvider>
         </Container>
       </PageViewProvider>
