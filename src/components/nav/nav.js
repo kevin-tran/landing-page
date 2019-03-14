@@ -8,17 +8,21 @@ import LinkBase from "../link/link";
 import PlusIcon from "../icons/plus/plus";
 import Clock from "../clock/clock";
 
+const Link = styled(LinkBase)({
+  fontWeight: 400,
+  lineHeight: 1.4
+});
+
 const NavContainer = styled("nav")({
   position: "absolute",
   top: 0,
   bottom: 0,
   left: 0,
-  right: 0
-});
-
-const Link = styled(LinkBase)({
-  fontWeight: 400,
-  lineHeight: 1.4
+  right: 0,
+  pointerEvents: "none",
+  [Link]: {
+    pointerEvents: "auto"
+  }
 });
 
 const Nav = ({ pathname }) => {
