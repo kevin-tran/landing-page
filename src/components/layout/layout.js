@@ -37,7 +37,7 @@ const globalStyles = css`
 `;
 
 const Layout = ({ children, location }) => {
-  const transitions = useTransition(location.pathname, null, {
+  const transitions = useTransition(location && location.pathname, null, {
     from: {
       opacity: 0,
       transform: "translate3d(100%,0,0)"
