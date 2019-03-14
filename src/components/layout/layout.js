@@ -62,7 +62,7 @@ const Layout = ({ children, location }) => {
             );
           })}
           <Cursor />
-          <Nav pathname={location.pathname} />
+          <Nav pathname={location && location.pathname} />
         </CursorProvider>
       </PageViewProvider>
     </ThemeProvider>
