@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import LinkBase from "gatsby-plugin-transition-link";
+import { Link as LinkBase } from "gatsby";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 
@@ -46,11 +46,10 @@ const Link = ({ children, href, external, exit, ...rest }) => {
 
   return (
     <GatsbyLink
-      to={href !== null && href}
+      to={href}
       activeStyle={linkStyles}
       onMouseEnter={() => setActiveState("linkHover")}
       onMouseLeave={() => setActiveState("normal")}
-      exit={{ ...exit, trigger: () => setActiveState("normal") }}
       {...rest}
     >
       {children}

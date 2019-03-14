@@ -71,18 +71,7 @@ const BodyContent = [
   {
     paragraph: (
       <Content>
-        Lorem ipsum dolor sit amet,{" "}
-        <Link
-          href="/about"
-          exit={{
-            length: 0.2
-          }}
-          entry={{
-            delay: 0.7
-          }}
-        >
-          consectetur
-        </Link>{" "}
+        Lorem ipsum dolor sit amet, <Link href="/about">consectetur</Link>{" "}
         adipiscing
       </Content>
     ),
@@ -111,10 +100,7 @@ const BodyContent = [
   }
 ];
 
-const IndexPage = ({ transitionStatus }) => {
-  const isActive =
-    transitionStatus === "entered" || transitionStatus === "entering";
-
+const IndexPage = () => {
   const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
 
   useEffect(() => {
@@ -140,7 +126,8 @@ const IndexPage = ({ transitionStatus }) => {
       transform: "translateY(50px)",
       shake: 0
     },
-    ref: landingRef
+    ref: landingRef,
+    delay: 800
   });
 
   const transitionRef = useRef();
@@ -148,11 +135,14 @@ const IndexPage = ({ transitionStatus }) => {
     from: { height: 0 },
     enter: { height: 44 },
     leave: { height: 0 },
-    update: { height: !isActive ? 0 : 44 },
-    ref: transitionRef
+    ref: transitionRef,
+    trail: 150
   });
 
-  useChain(homeHasLoaded ? [transitionRef] : [landingRef, transitionRef]);
+  useChain(
+    homeHasLoaded ? [transitionRef] : [landingRef, transitionRef],
+    homeHasLoaded ? [0.6] : null
+  );
 
   return (
     <>
