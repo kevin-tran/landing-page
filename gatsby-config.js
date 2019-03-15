@@ -1,3 +1,5 @@
+const path = require("path");
+
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`
 });
@@ -28,6 +30,16 @@ module.exports = {
         background_color: `#000`,
         theme_color: `#000`,
         display: `minimal-ui`
+      }
+    },
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          components: path.resolve(__dirname, "src/components"),
+          global: path.resolve(__dirname, "src/global")
+        },
+        extensions: ["js"]
       }
     },
     {

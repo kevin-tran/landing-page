@@ -1,13 +1,13 @@
 /** @jsx jsx */
 
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useSpring, useChain, useTransition, animated } from "react-spring";
-import { PageViewContext } from "../global/pageViewContext";
+import { PageViewContext } from "global/context/pageViewContext";
 
-import SEO from "../components/seo/seo";
-import Link from "../components/link/link";
+import SEO from "components/seo/seo";
+import Link from "components/link/link";
 
 const Root = styled("section")({
   display: "flex",
@@ -36,7 +36,7 @@ const WaveHeading = ({ style: { shake, ...rest } }) => {
   return (
     <Heading style={rest}>
       Hi!{" "}
-      <animated.div
+      <animated.span
         role="img"
         aria-label="wave emoji"
         style={{
@@ -47,9 +47,10 @@ const WaveHeading = ({ style: { shake, ...rest } }) => {
             })
             .interpolate(x => `scale(${x})`)
         }}
+        css={{ display: "block" }}
       >
         👋
-      </animated.div>
+      </animated.span>
     </Heading>
   );
 };
@@ -111,7 +112,7 @@ const IndexPage = () => {
     };
   }, [homeHasLoaded]);
 
-  const landingRef = useRef();
+  const landingRef = React.useRef();
   const landingProps = useSpring({
     to: [
       { opacity: 1, transform: "translateY(0)" },
@@ -130,7 +131,7 @@ const IndexPage = () => {
     delay: 800
   });
 
-  const transitionRef = useRef();
+  const transitionRef = React.useRef();
   const transitions = useTransition(BodyContent, item => item.key, {
     from: { height: 0 },
     enter: { height: 44 },

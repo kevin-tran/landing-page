@@ -4,7 +4,7 @@ import React, { useEffect, useContext } from "react";
 import styled from "@emotion/styled";
 import { jsx, css } from "@emotion/core";
 import { useTrail, useSpring, animated } from "react-spring";
-import { CursorContext } from "../../global/cursorContext";
+import { CursorContext } from "global/context/cursorContext";
 
 const CursorOuter = styled("div")({
   width: 30,

@@ -3,15 +3,10 @@
 import React from "react";
 import { Global, css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import { ThemeProvider } from "emotion-theming";
 import { useTransition, animated } from "react-spring";
 
-import Theme from "../../global/theme";
-import PageViewProvider from "../../global/pageViewContext";
-import CursorProvider from "../../global/cursorContext";
-
-import Cursor from "../cursor/cursor";
-import Nav from "../nav/nav";
+import Cursor from "components/cursor/cursor";
+import Nav from "components/nav/nav";
 
 const Container = styled(animated.main)({
   margin: "0 auto",
@@ -19,7 +14,8 @@ const Container = styled(animated.main)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  textAlign: "center"
+  textAlign: "center",
+  backgroundColor: "lightpink"
 });
 
 const globalStyles = css`
@@ -50,22 +46,18 @@ const Layout = ({ children, location }) => {
   });
 
   return (
-    <ThemeProvider theme={Theme}>
-      <PageViewProvider>
-        <CursorProvider>
-          {transitions.map(({ item, props, key }) => {
-            return (
-              <Container key={key} style={props}>
-                <Global styles={globalStyles} />
-                {children}
-              </Container>
-            );
-          })}
-          <Cursor />
-          <Nav pathname={location && location.pathname} />
-        </CursorProvider>
-      </PageViewProvider>
-    </ThemeProvider>
+    <React.Fragment>
+      {transitions.map(({ item, props, key }) => {
+        return (
+          <Container key={key} style={props}>
+            <Global styles={globalStyles} />
+            {children}
+          </Container>
+        );
+      })}
+      <Cursor />
+      <Nav pathname={location && location.pathname} />
+    </React.Fragment>
   );
 };
 

@@ -4,9 +4,9 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 
-import LinkBase from "../link/link";
-import PlusIcon from "../icons/plus/plus";
-import Clock from "../clock/clock";
+import LinkBase from "components/link/link";
+import PlusIcon from "components/icons/plus/plus";
+import Clock from "components/clock/clock";
 
 const Link = styled(LinkBase)({
   fontWeight: 400,

@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "../components/link/link";
+import Link from "components/link/link";
 
 const About = () => (
   <div>

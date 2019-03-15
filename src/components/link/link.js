@@ -3,7 +3,7 @@ import { Link as LinkBase } from "gatsby";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 
-import { CursorContext } from "../../global/cursorContext";
+import { CursorContext } from "global/context/cursorContext";
 
 const linkStyles = css({
   color: "black",
