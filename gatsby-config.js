@@ -15,6 +15,8 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
+    "gatsby-plugin-netlify",
+    "gatsby-plugin-netlify-cache",
     {
       resolve: "gatsby-plugin-layout",
       options: {
@@ -30,6 +32,12 @@ module.exports = {
         background_color: `#000`,
         theme_color: `#000`,
         display: `minimal-ui`
+      }
+    },
+    {
+      resolve: "gatsby-plugin-emoji-favicon",
+      options: {
+        emoji: "✌️"
       }
     },
     {

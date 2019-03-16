@@ -7,7 +7,7 @@ import { CursorContext } from "global/context/cursorContext";
 
 const linkStyles = css({
   color: "black",
-  fontWeight: 700,
+  fontWeight: 400,
   textDecoration: "none",
   position: "relative",
   ["&:before"]: {

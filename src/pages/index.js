@@ -7,7 +7,7 @@ import { useSpring, useChain, useTransition, animated } from "react-spring";
 import { PageViewContext } from "global/context/pageViewContext";
 
 import SEO from "components/seo/seo";
-import Link from "components/link/link";
+import LinkBase from "components/link/link";
 
 const Root = styled("section")({
   display: "flex",
@@ -32,13 +32,15 @@ const Body = styled(animated.h3)(({ theme }) => ({
   margin: 0
 }));
 
+const Link = styled(LinkBase)({
+  fontWeight: 700
+});
+
 const WaveHeading = ({ style: { shake, ...rest } }) => {
   return (
     <Heading style={rest}>
       Hi!{" "}
       <animated.span
-        role="img"
-        aria-label="wave emoji"
         style={{
           transform: shake
             .interpolate({
@@ -47,9 +49,10 @@ const WaveHeading = ({ style: { shake, ...rest } }) => {
             })
             .interpolate(x => `scale(${x})`)
         }}
-        css={{ display: "block" }}
       >
-        👋
+        <span role="img" aria-label="wave emoji" css={{ display: "block" }}>
+          👋
+        </span>
       </animated.span>
     </Heading>
   );
@@ -101,7 +104,9 @@ const BodyContent = [
   }
 ];
 
-const IndexPage = () => {
+const config = { mass: 5, tension: 2000, friction: 200 };
+
+const IndexPage = props => {
   const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
 
   useEffect(() => {
@@ -127,8 +132,7 @@ const IndexPage = () => {
       transform: "translateY(50px)",
       shake: 0
     },
-    ref: landingRef,
-    delay: 800
+    ref: landingRef
   });
 
   const transitionRef = React.useRef();
@@ -137,13 +141,11 @@ const IndexPage = () => {
     enter: { height: 44 },
     leave: { height: 0 },
     ref: transitionRef,
-    trail: 150
+    trail: 150,
+    config
   });
 
-  useChain(
-    homeHasLoaded ? [transitionRef] : [landingRef, transitionRef],
-    homeHasLoaded ? [0.6] : null
-  );
+  useChain(homeHasLoaded ? [transitionRef] : [landingRef, transitionRef]);
 
   return (
     <>

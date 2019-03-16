@@ -48,9 +48,7 @@ const CircleBase = css({
   transition: "all .4s ease-in-out"
 });
 
-const CircleHover = css({
-  fill: "#eee"
-});
+const CircleHover = css({});
 
 const Circle = ({ activeState }) => {
   const props = useSpring({ offset: 0, from: { offset: 1000 } });
@@ -60,12 +58,12 @@ const Circle = ({ activeState }) => {
       viewBox="0 0 50 50"
       width="50"
       height="50"
-      css={{ transform: "translate(-22px, -23px)" }}
+      css={[
+        { transform: "translate(-22px, -23px)" },
+        activeState === "linkHover" && CircleHover
+      ]}
     >
-      <animated.circle
-        strokeDashoffset={props.offset}
-        css={[CircleBase, activeState === "linkHover" && CircleHover]}
-      />
+      <animated.circle strokeDashoffset={props.offset} css={[CircleBase]} />
     </animated.svg>
   );
 };

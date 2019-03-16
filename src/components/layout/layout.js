@@ -1,12 +1,14 @@
 /** @jsx jsx */
 
-import React from "react";
+import React, { useState } from "react";
 import { Global, css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useTransition, animated } from "react-spring";
 
 import Cursor from "components/cursor/cursor";
 import Nav from "components/nav/nav";
+import DelayRender from "components/delayRender/delayRender";
+import delay from "await-delay";
 
 const Container = styled(animated.main)({
   margin: "0 auto",
@@ -14,8 +16,7 @@ const Container = styled(animated.main)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  textAlign: "center",
-  backgroundColor: "lightpink"
+  textAlign: "center"
 });
 
 const globalStyles = css`
@@ -33,26 +34,29 @@ const globalStyles = css`
 `;
 
 const Layout = ({ children, location }) => {
-  const transitions = useTransition(location && location.pathname, null, {
+  const transitions = useTransition(children, children => children.key, {
     from: {
       opacity: 0,
-      transform: "translate3d(100%,0,0)"
+      exiting: 0
     },
-    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
-    leave: {
-      opacity: 0,
-      transform: "translate3d(-50%,0,0)"
+    enter: { opacity: 1, exiting: 0 },
+    leave: item => async (next, cancel) => {
+      await next({ exiting: 1 });
+      await delay(150);
+      await next({ opacity: 0 });
     }
   });
 
   return (
     <React.Fragment>
-      {transitions.map(({ item, props, key }) => {
+      <Global styles={globalStyles} />
+      {transitions.map(({ item, props: { opacity, exiting }, key }) => {
         return (
-          <Container key={key} style={props}>
-            <Global styles={globalStyles} />
-            {children}
-          </Container>
+          <DelayRender>
+            <Container key={key} style={{ opacity }}>
+              {item}
+            </Container>
+          </DelayRender>
         );
       })}
       <Cursor />
