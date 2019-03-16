@@ -39,13 +39,13 @@ const Layout = ({ children, location }) => {
   const transitions = useTransition(children, children => children.key, {
     from: {
       opacity: 0,
-      transform: "translateY(0)"
+      transform: "translate3d(0,40px,0)"
     },
-    enter: item => async (next, cancel) => {
-      await next({ opacity: 1, transform: "translateY(0)" });
+    enter: () => async next => {
+      await next({ opacity: 1, transform: "translate3d(0,0,0)" });
     },
-    leave: item => async (next, cancel) => {
-      await next({ opacity: 0, transform: "translateY(50px)" });
+    leave: () => async next => {
+      await next({ opacity: 0, transform: "translate3d(0,40px,0)" });
       await delay(150);
     }
   });
@@ -53,10 +53,10 @@ const Layout = ({ children, location }) => {
   return (
     <React.Fragment>
       <Global styles={globalStyles} />
-      {transitions.map(({ item, props: { opacity, exiting }, key }) => {
+      {transitions.map(({ item, props, key }) => {
         return (
           <DelayRender>
-            <Container key={key} style={{ opacity }}>
+            <Container key={key} style={props}>
               {item}
             </Container>
           </DelayRender>
