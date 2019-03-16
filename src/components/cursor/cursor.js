@@ -48,7 +48,9 @@ const CircleBase = css({
   transition: "all .4s ease-in-out"
 });
 
-const CircleHover = css({});
+const CircleHover = css({
+  transform: "translate(-22px, -23px) scale(1.5)"
+});
 
 const Circle = ({ activeState }) => {
   const props = useSpring({ offset: 0, from: { offset: 1000 } });
@@ -59,7 +61,10 @@ const Circle = ({ activeState }) => {
       width="50"
       height="50"
       css={[
-        { transform: "translate(-22px, -23px)" },
+        {
+          transform: "translate(-22px, -23px)",
+          transition: "transform .3s ease"
+        },
         activeState === "linkHover" && CircleHover
       ]}
     >

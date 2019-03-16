@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import LinkBase from "components/link/link";
 import Socials from "components/socials/socials";
 import Clock from "components/clock/clock";
+import Breadcrumbs from "components/breadcrumbs/breadcrumbs";
 
 const Link = styled(LinkBase)({
   fontWeight: 400,
@@ -32,22 +33,23 @@ const Nav = ({ pathname }) => {
       ) : (
         <span css={{ position: "absolute", top: 30, right: 30 }}>about</span>
       )}
-      {pathname !== "/" ? (
-        <Link
-          href="/"
-          css={{ position: "absolute", top: 30, left: 30 }}
-          exit={{
-            length: 0.3
-          }}
-          entry={{
-            delay: 0.6
-          }}
-        >
-          kevin
-        </Link>
-      ) : (
-        <span css={{ position: "absolute", top: 30, left: 30 }}>kevin</span>
-      )}
+      <div css={{ position: "absolute", top: 30, left: 30, display: "flex" }}>
+        {pathname !== "/" ? (
+          <Link
+            href="/"
+            exit={{
+              length: 0.3
+            }}
+            entry={{
+              delay: 0.6
+            }}
+          >
+            kevin
+          </Link>
+        ) : (
+          <span>kevin</span>
+        )}
+      </div>
       <Socials css={{ position: "absolute", bottom: 30, right: 30 }} />
       <Clock css={{ position: "absolute", bottom: 30, left: 30 }} />
     </React.Fragment>
