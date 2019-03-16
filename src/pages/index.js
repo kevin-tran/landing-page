@@ -111,14 +111,12 @@ const IndexPage = props => {
 
   useEffect(() => {
     return () => {
-      if (!homeHasLoaded) {
-        setHasLoaded();
-      }
+      setHasLoaded();
     };
   }, [homeHasLoaded]);
 
   const landingRef = React.useRef();
-  const landingProps = useSpring({
+  const [landingProps] = useSpring(() => ({
     to: [
       { opacity: 1, transform: "translateY(0)" },
       { shake: 1 },
@@ -132,8 +130,9 @@ const IndexPage = props => {
       transform: "translateY(50px)",
       shake: 0
     },
+    unique: true,
     ref: landingRef
-  });
+  }));
 
   const transitionRef = React.useRef();
   const transitions = useTransition(BodyContent, item => item.key, {
@@ -142,6 +141,8 @@ const IndexPage = props => {
     leave: { height: 0 },
     ref: transitionRef,
     trail: 150,
+    unique: true,
+    reset: true,
     config
   });
 

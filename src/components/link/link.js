@@ -50,6 +50,7 @@ const Link = ({ children, href, external, exit, ...rest }) => {
       activeStyle={linkStyles}
       onMouseEnter={() => setActiveState("linkHover")}
       onMouseLeave={() => setActiveState("normal")}
+      onClick={() => setActiveState("normal")}
       {...rest}
     >
       {children}

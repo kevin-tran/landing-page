@@ -1,14 +1,16 @@
 /** @jsx jsx */
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Global, css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useTransition, animated } from "react-spring";
+import delay from "await-delay";
 
 import Cursor from "components/cursor/cursor";
 import Nav from "components/nav/nav";
 import DelayRender from "components/delayRender/delayRender";
-import delay from "await-delay";
+
+import { CursorContext } from "global/context/cursorContext";
 
 const Container = styled(animated.main)({
   margin: "0 auto",
@@ -37,13 +39,14 @@ const Layout = ({ children, location }) => {
   const transitions = useTransition(children, children => children.key, {
     from: {
       opacity: 0,
-      exiting: 0
+      transform: "translateY(0)"
     },
-    enter: { opacity: 1, exiting: 0 },
+    enter: item => async (next, cancel) => {
+      await next({ opacity: 1, transform: "translateY(0)" });
+    },
     leave: item => async (next, cancel) => {
-      await next({ exiting: 1 });
+      await next({ opacity: 0, transform: "translateY(50px)" });
       await delay(150);
-      await next({ opacity: 0 });
     }
   });
 
