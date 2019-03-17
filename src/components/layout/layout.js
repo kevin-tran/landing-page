@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React, { useState, useContext } from "react";
+import React from "react";
 import { Global, css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useTransition, animated } from "react-spring";
@@ -9,8 +9,6 @@ import delay from "await-delay";
 import Cursor from "components/cursor/cursor";
 import Nav from "components/nav/nav";
 import DelayRender from "components/delayRender/delayRender";
-
-import { CursorContext } from "global/context/cursorContext";
 
 const Container = styled(animated.main)({
   margin: "0 auto",

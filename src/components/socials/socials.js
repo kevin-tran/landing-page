@@ -21,31 +21,45 @@ const Link = styled(LinkBase)({
 });
 
 const SocialLinks = [
-  <Link href="/">github</Link>,
-  <Link href="/">linkedin</Link>,
-  <Link href="/">email</Link>
+  {
+    site: "github",
+    link: "https://github.com/kevin-tran"
+  },
+  {
+    site: "linkedin",
+    link: "https://www.linkedin.com/in/kevin-tran-35a135108"
+  },
+  {
+    site: "email",
+    link: "mailto:hello@kevin.today?subject=Hey! Came from your website"
+  }
 ];
 
 const Socials = props => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const transitions = useTransition(isOpen, null, {
-    from: { opacity: 0, transform: "translateX(50px)" },
-    enter: { opacity: 1, transform: "translateX(0)" },
-    leave: { opacity: 0, transform: "translateX(50px)" }
+  const transitions = useTransition(SocialLinks, item => item.site, {
+    from: { transform: "translate3d(0,40px,0)", opacity: 0 },
+    enter: { transform: "translate3d(0,0px,0)", opacity: 0 },
+    leave: { transform: "translate3d(0,40px,0)" },
+    update: {
+      transform: isOpen ? "translate3d(0,0,0)" : "translate3d(0,40px,0)",
+      opacity: isOpen ? 1 : 0
+    },
+    trail: 150
   });
 
   return (
     <Container {...props}>
       <PlusIcon onClick={() => setIsOpen(!isOpen)} />
-      {transitions.map(
-        ({ item, props, key }) =>
-          item && (
-            <LinkContainer style={props} key={key}>
-              {SocialLinks.map(item => item)}
-            </LinkContainer>
-          )
-      )}
+
+      {transitions.map(({ item, key, props }) => (
+        <animated.div key={key} style={props}>
+          <Link href={item.link} external>
+            {item.site}
+          </Link>
+        </animated.div>
+      ))}
     </Container>
   );
 };

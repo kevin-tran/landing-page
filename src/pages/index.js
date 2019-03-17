@@ -106,7 +106,7 @@ const BodyContent = [
 
 const config = { mass: 5, tension: 2000, friction: 200 };
 
-const IndexPage = props => {
+const IndexPage = () => {
   const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
 
   useEffect(() => {
@@ -142,7 +142,6 @@ const IndexPage = props => {
     ref: transitionRef,
     trail: 150,
     unique: true,
-    reset: true,
     config
   });
 

@@ -17,7 +17,7 @@ const linkStyles = css({
     bottom: 0,
     left: 0,
     position: "absolute",
-    height: 2,
+    height: 1,
     background: "black",
     transform: "scale3d(0,1,1)",
     transformOrigin: "0% 50%",
@@ -38,7 +38,12 @@ const Link = ({ children, href, external, exit, ...rest }) => {
 
   if (external) {
     return (
-      <ATag href={href} target="_blank" rel="noopener noreferrer">
+      <ATag
+        href={href}
+        target={href.match("mailto") ? null : "_blank"}
+        rel="noopener noreferrer"
+        {...rest}
+      >
         {children}
       </ATag>
     );
