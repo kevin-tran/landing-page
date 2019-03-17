@@ -3,7 +3,13 @@
 import React, { useContext, useEffect } from "react";
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import { useSpring, useChain, useTransition, animated } from "react-spring";
+import {
+  useSpring,
+  useChain,
+  useTransition,
+  animated,
+  config
+} from "react-spring";
 import { PageViewContext } from "global/context/pageViewContext";
 
 import SEO from "components/seo/seo";
@@ -104,7 +110,7 @@ const BodyContent = [
   }
 ];
 
-const config = { mass: 5, tension: 2000, friction: 200 };
+const transitionConfig = { mass: 10, tension: 2000, friction: 200 };
 
 const IndexPage = () => {
   const { homeHasLoaded, setHasLoaded } = useContext(PageViewContext);
@@ -118,7 +124,10 @@ const IndexPage = () => {
   const landingRef = React.useRef();
   const [landingProps] = useSpring(() => ({
     to: [
-      { opacity: 1, transform: "translateY(0)" },
+      {
+        opacity: 1,
+        transform: "translateY(0)"
+      },
       { shake: 1 },
       {
         opacity: 0,
@@ -131,7 +140,8 @@ const IndexPage = () => {
       shake: 0
     },
     unique: true,
-    ref: landingRef
+    ref: landingRef,
+    config: transitionConfig
   }));
 
   const transitionRef = React.useRef();
@@ -142,7 +152,7 @@ const IndexPage = () => {
     ref: transitionRef,
     trail: 150,
     unique: true,
-    config
+    transitionConfig
   });
 
   useChain(homeHasLoaded ? [transitionRef] : [landingRef, transitionRef]);

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React from "react";
+import React, { useContext } from "react";
 import { Global, css, jsx } from "@emotion/core";
 import styled from "@emotion/styled";
 import { useTransition, animated } from "react-spring";
@@ -9,10 +9,11 @@ import delay from "await-delay";
 import Cursor from "components/cursor/cursor";
 import Nav from "components/nav/nav";
 import DelayRender from "components/delayRender/delayRender";
+import { TimeContext } from "global/context/timeContext";
 
 const Container = styled(animated.main)({
   margin: "0 auto",
-  minHeight: "100vh",
+  minHeight: "calc(100vh - 20px)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -34,6 +35,8 @@ const globalStyles = css`
 `;
 
 const Layout = ({ children, location }) => {
+  const { time } = useContext(TimeContext);
+
   const transitions = useTransition(children, children => children.key, {
     from: {
       opacity: 0,

@@ -22,16 +22,16 @@ const Link = styled(LinkBase)({
 
 const SocialLinks = [
   {
-    site: "github",
-    link: "https://github.com/kevin-tran"
+    site: "email",
+    link: "mailto:hello@kevin.today?subject=Hey! Came from your website"
   },
   {
     site: "linkedin",
     link: "https://www.linkedin.com/in/kevin-tran-35a135108"
   },
   {
-    site: "email",
-    link: "mailto:hello@kevin.today?subject=Hey! Came from your website"
+    site: "github",
+    link: "https://github.com/kevin-tran"
   }
 ];
 
@@ -39,12 +39,15 @@ const Socials = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const transitions = useTransition(SocialLinks, item => item.site, {
-    from: { transform: "translate3d(0,40px,0)", opacity: 0 },
-    enter: { transform: "translate3d(0,0px,0)", opacity: 0 },
-    leave: { transform: "translate3d(0,40px,0)" },
+    from: {
+      transform: "translate3d(40px,0,0)",
+      opacity: 0,
+      pointerEvents: "none"
+    },
     update: {
-      transform: isOpen ? "translate3d(0,0,0)" : "translate3d(0,40px,0)",
-      opacity: isOpen ? 1 : 0
+      transform: isOpen ? "translate3d(0,0,0)" : "translate3d(40px,0,0)",
+      opacity: isOpen ? 1 : 0,
+      pointerEvents: isOpen ? "auto" : "none"
     },
     trail: 150
   });
