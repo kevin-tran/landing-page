@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { CursorContext } from "global/context/cursorContext";
 
 const linkStyles = css({
-  color: "black",
+  color: "white",
   fontWeight: 400,
   textDecoration: "none",
   position: "relative",
@@ -18,7 +18,7 @@ const linkStyles = css({
     left: 0,
     position: "absolute",
     height: 1,
-    background: "black",
+    background: "white",
     transform: "scale3d(0,1,1)",
     transformOrigin: "0% 50%",
     transition: "transform 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000)"
@@ -42,6 +42,9 @@ const Link = ({ children, href, external, exit, ...rest }) => {
         href={href}
         target={href.match("mailto") ? null : "_blank"}
         rel="noopener noreferrer"
+        onMouseEnter={() => setActiveState("linkHover")}
+        onMouseLeave={() => setActiveState("normal")}
+        onClick={() => setActiveState("normal")}
         {...rest}
       >
         {children}

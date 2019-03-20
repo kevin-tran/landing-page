@@ -18,7 +18,7 @@ const CursorInner = styled(animated.div)({
   left: -2.5,
   top: -2.5,
   zIndex: 11000,
-  background: "#000",
+  background: "white",
   borderRadius: "50%"
 });
 
@@ -42,7 +42,7 @@ const CircleBase = css({
   cx: 25,
   cy: 25,
   r: 20,
-  stroke: "#000",
+  stroke: "white",
   strokeWidth: 1,
   strokeDasharray: 1000,
   transition: "all .4s ease-in-out"

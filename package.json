@@ -7,7 +7,6 @@
   "dependencies": {
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
-    "add": "^2.0.6",
     "await-delay": "^1.0.0",
     "date-fns-timezone": "^0.1.4",
     "emotion": "^10.0.7",
@@ -31,12 +30,12 @@
     "lodash.get": "^4.4.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
+    "react-flip-toolkit": "^6.5.7",
     "react-helmet": "^5.2.0",
     "react-spring": "^8.0.9",
     "react-transition-group": "^2.6.0",
     "react-transition-group-plus": "^0.5.3",
-    "react-with-gesture": "^4.0.5",
-    "yarn": "^1.13.0"
+    "react-with-gesture": "^4.0.5"
   },
   "keywords": [
     "gatsby"
@@ -44,7 +43,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""

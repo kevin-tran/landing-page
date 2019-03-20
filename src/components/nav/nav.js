@@ -20,7 +20,7 @@ const Nav = ({ pathname }) => {
       {pathname !== "/about" ? (
         <Link
           href="/about"
-          css={{ position: "absolute", top: 30, right: 30 }}
+          css={{ position: "fixed", top: 30, right: 30 }}
           exit={{
             length: 0.3
           }}
@@ -31,9 +31,9 @@ const Nav = ({ pathname }) => {
           about
         </Link>
       ) : (
-        <span css={{ position: "absolute", top: 30, right: 30 }}>about</span>
+        <span css={{ position: "fixed", top: 30, right: 30 }}>about</span>
       )}
-      <div css={{ position: "absolute", top: 30, left: 30, display: "flex" }}>
+      <div css={{ position: "fixed", top: 30, left: 30, display: "flex" }}>
         {pathname !== "/" ? (
           <Link
             href="/"
@@ -50,8 +50,8 @@ const Nav = ({ pathname }) => {
           <span>kevin</span>
         )}
       </div>
-      <Socials css={{ position: "absolute", bottom: 30, right: 30 }} />
-      <Clock css={{ position: "absolute", bottom: 30, left: 30 }} />
+      <Socials css={{ position: "fixed", bottom: 30, right: 30 }} />
+      <Clock css={{ position: "fixed", bottom: 30, left: 30 }} />
     </React.Fragment>
   );
 };

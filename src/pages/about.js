@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styled from "@emotion/styled";
-import { useSpring, useChain, animated, useTransition } from "react-spring";
+import { animated, useTransition } from "react-spring";
 
 const Container = styled(animated.section)({
   display: "flex",
@@ -45,6 +45,21 @@ const WorkContent = [
   }
 ];
 
+const Skills = [
+  "React",
+  "Typescript",
+  "ES6",
+  "Redux",
+  "Webpack",
+  "Jest",
+  "Emotion",
+  "Git",
+  "Gatsby",
+  "Next",
+  "Node (Express)",
+  "GraphQL"
+];
+
 const About = () => {
   const Rows = useTransition(WorkContent, i => i.company, {
     from: { opacity: 0, transform: "translateY(50px)" },
@@ -55,15 +70,26 @@ const About = () => {
 
   return (
     <Container>
-      {Rows.map(({ item, key, props }) => (
-        <Row style={props} key={key}>
-          <HistoryContainer>
-            <Heading>{item.role}</Heading>
-            <Heading sub>{item.company}</Heading>
-          </HistoryContainer>
-          <Heading css={{ marginLeft: "auto" }}>{item.dates}</Heading>
-        </Row>
-      ))}
+      <div css={{ display: "flex" }}>
+        <Heading>Work History</Heading>
+        <div css={{ marginLeft: "auto" }}>
+          {Rows.map(({ item, key, props }) => (
+            <Row style={props} key={key}>
+              <HistoryContainer>
+                <Heading>{item.role}</Heading>
+                <Heading sub>{item.company}</Heading>
+              </HistoryContainer>
+              <Heading css={{ marginLeft: "auto", paddingLeft: 50 }}>
+                {item.dates}
+              </Heading>
+            </Row>
+          ))}
+        </div>
+      </div>
+      <div css={{ display: "flex", marginTop: 60 }}>
+        <Heading>Keyword Dump</Heading>
+        <div css={{ marginLeft: "auto" }} />
+      </div>
     </Container>
   );
 };
