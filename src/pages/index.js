@@ -3,13 +3,8 @@
 import React, { useContext, useEffect } from "react";
 import { jsx } from "@emotion/core";
 import styled from "@emotion/styled";
-import {
-  useSpring,
-  useChain,
-  useTransition,
-  animated,
-  config
-} from "react-spring";
+import { useSpring, useChain, useTransition, animated } from "react-spring";
+
 import { PageViewContext } from "global/context/pageViewContext";
 
 import SEO from "components/seo/seo";
@@ -156,6 +151,8 @@ const IndexPage = () => {
   });
 
   useChain(homeHasLoaded ? [transitionRef] : [landingRef, transitionRef]);
+
+  const [isFull, setFull] = React.useState(false);
 
   return (
     <>

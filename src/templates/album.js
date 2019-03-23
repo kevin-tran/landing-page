@@ -4,7 +4,6 @@ import Img from "gatsby-image";
 import styled from "@emotion/styled";
 import get from "lodash.get";
 
-import Layout from "../components/layout/layout";
 import SEO from "../components/seo/seo";
 
 const Gutter = styled("section")({
@@ -32,14 +31,14 @@ const AlbumTemplate = ({ data }) => {
   const title = get(data, "contentfulAlbum.title");
 
   return (
-    <Layout>
+    <React.Fragment>
       <SEO title={title} />
       <Gutter>
         {album.map(image => {
           return <NonStretchedImage {...image} key={image.title} />;
         })}
       </Gutter>
-    </Layout>
+    </React.Fragment>
   );
 };
 

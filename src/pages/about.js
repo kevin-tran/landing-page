@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { animated, useTransition } from "react-spring";
 
@@ -46,18 +46,17 @@ const WorkContent = [
 ];
 
 const Skills = [
-  "React",
-  "Typescript",
-  "ES6",
-  "Redux",
-  "Webpack",
-  "Jest",
-  "Emotion",
-  "Git",
-  "Gatsby",
-  "Next",
-  "Node (Express)",
-  "GraphQL"
+  { skill: "React", rating: 5 },
+  { skill: "Typescript", rating: 3 },
+  { skill: "ES6", rating: 5 },
+  { skill: "Redux", rating: 4 },
+  { skill: "Jest", rating: 3 },
+  { skill: "Emotion", rating: 5 },
+  { skill: "Git", rating: 4 },
+  { skill: "Gatsby", rating: 5 },
+  { skill: "Next", rating: 4 },
+  { skill: "Node (Express)", rating: 3 },
+  { skill: "GraphQL", rating: 3 }
 ];
 
 const About = () => {
@@ -88,7 +87,11 @@ const About = () => {
       </div>
       <div css={{ display: "flex", marginTop: 60 }}>
         <Heading>Keyword Dump</Heading>
-        <div css={{ marginLeft: "auto" }} />
+        <div css={{ marginLeft: "auto" }}>
+          {Skills.map(skill => (
+            <span>{skill.skill}</span>
+          ))}
+        </div>
       </div>
     </Container>
   );

@@ -54,7 +54,7 @@ const Socials = props => {
 
   return (
     <Container {...props}>
-      <PlusIcon onClick={() => setIsOpen(!isOpen)} css={{ fill: "white" }} />
+      <PlusIcon onClick={() => setIsOpen(!isOpen)} css={{ fill: "black" }} />
 
       {transitions.map(({ item, key, props }) => (
         <animated.div key={key} style={props}>
